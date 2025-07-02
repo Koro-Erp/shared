@@ -1,0 +1,50 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Output of the go coverage tool
+*.coverprofile
+*.cov
+
+# Dependency directories (if using vendoring)
+vendor/
+
+# Go modules cache (if checked in by mistake)
+go.sum
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Build directories
+bin/
+dist/
+
+# GoLand test results
+*.tmp
+
+# Test binary
+main.test
+
+# Environment variables
+.env
+.env.*
+
+# System/permission/config files
+*.pem         # Private key files
+*.key         # SSL keys
+*.crt         # SSL certs
+*.conf        # Custom config files
