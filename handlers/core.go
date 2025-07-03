@@ -5,8 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"github.com/Koro-Erp/shared/models"
 	"net/http"
+
+	"github.com/Koro-Erp/shared/models"
+	"github.com/Koro-Erp/shared/util"
 
 	"github.com/gin-gonic/gin"
 )
@@ -26,7 +28,7 @@ func SendLogRequest(c *gin.Context, data models.AppLog, url string) error {
 	req.Header.Set("Content-Type", "application/json")
 
 	// Use the helper function to set token headers
-	CopyAuthHeaders(c, req)
+	util.CopyAuthHeaders(c, req)
 
 	// Send request
 	client := &http.Client{}
@@ -41,14 +43,4 @@ func SendLogRequest(c *gin.Context, data models.AppLog, url string) error {
 	fmt.Println("Log response:", string(body))
 
 	return nil
-}
-
-// CopyAuthHeaders copies Authorization and X-User-Token from the incoming Gin context to the outbound HTTP request
-func CopyAuthHeaders(c *gin.Context, req *http.Request) {
-	if authToken := c.GetHeader("Authorization"); authToken != "" {
-		req.Header.Set("Authorization", authToken)
-	}
-	if userToken := c.GetHeader("X-User-Token"); userToken != "" {
-		req.Header.Set("X-User-Token", userToken)
-	}
 }
