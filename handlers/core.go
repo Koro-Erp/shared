@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"github.com/Koro-Erp/shared/internal/models"
+	"github.com/Koro-Erp/shared/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
