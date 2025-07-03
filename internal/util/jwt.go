@@ -7,8 +7,8 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 )
-func LoadPublicKey() *rsa.PublicKey {
-	pem, err := os.ReadFile("internal/config/keys/public.pem")
+func LoadPublicKey(path string) *rsa.PublicKey {
+	pem, err := os.ReadFile(path)
 	if err != nil {
 		panic("Failed to load public key")
 	}
