@@ -4,21 +4,33 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-    _ "github.com/lib/pq"
+	"time"
+	
+	_ "github.com/lib/pq" // PostgreSQL driver
 )
 
-func Connect(dbHost string, dbPort string, dbUsername string, dbPassword string, dbName string, dbSSLMode string) *sql.DB {
-    connStr := fmt.Sprintf(
-        "host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
-        dbHost, dbPort, dbUsername, dbPassword, dbName, dbSSLMode,
-    )
+func Connect(dbHost, dbPort, dbUsername, dbPassword, dbName, dbSSLMode string) (*sql.DB, error) {
+	connStr := fmt.Sprintf(
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
+		dbHost, dbPort, dbUsername, dbPassword, dbName, dbSSLMode,
+	)
 
-    log.Println(connStr)
+	log.Println("Connecting to database...") // Less sensitive than logging full connection string
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		return nil, fmt.Errorf("failed to open database connection: %w", err)
+	}
 
-    db, err := sql.Open("postgres", connStr)
-    if err != nil {
-        log.Fatal("Error connecting to database:", err)
-    }
+	// Verify the connection is actually working
+	err = db.Ping()
+	if err != nil {
+		return nil, fmt.Errorf("failed to ping database: %w", err)
+	}
 
-    return db
+	// Configure connection pool settings (recommended)
+	db.SetMaxOpenConns(25)
+	db.SetMaxIdleConns(25)
+	db.SetConnMaxLifetime(5 * time.Minute)
+
+	return db, nil
 }
