@@ -47,6 +47,7 @@ func LoadConfig() (models.DbConfig,models.ServiceUrlConfig,models.KeyConfig){
 	KeyConfig := models.KeyConfig{
 		EncryptionKey: os.Getenv("AUTO_INCREMENT_STRATEGY"),
 		PublicKey: util.LoadPublicKey(os.Getenv("PUBLIC_KEY_PATH")),
+		JwtKey : os.Getenv("JWT_SECRET_KEY"),
 	}
 
 	return dbConfig,serviceUrlsConfig,KeyConfig
