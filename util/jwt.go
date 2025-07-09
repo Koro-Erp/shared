@@ -24,7 +24,7 @@ func LoadPublicKey(path string) *rsa.PublicKey {
 }
 
 func LoadPrivateKey(path string) *rsa.PrivateKey {
-	pem, err := os.ReadFile("internal/config/keys/private.pem")
+	pem, err := os.ReadFile(path)
 	if err != nil {
 		panic("Failed to load private key")
 	}
