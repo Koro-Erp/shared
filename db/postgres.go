@@ -3,7 +3,6 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/Koro-Erp/shared/models"
@@ -16,17 +15,17 @@ func Connect(dbConfig models.DbConfig) (*sql.DB, error) {
 		dbConfig.DBHost, dbConfig.DBPort, dbConfig.DBUser, dbConfig.DBPassword, dbConfig.DBName, dbConfig.DBSSLMode,
 	)
 
-	log.Println(connStr)
+	// log.Println(connStr)
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open database connection: %w", err)
 	}
 
 	// Verify the connection is actually working
-	err = db.Ping()
-	if err != nil {
-		return nil, fmt.Errorf("failed to ping database: %w", err)
-	}
+	// err = db.Ping()
+	// if err != nil {
+	// 	return nil, fmt.Errorf("failed to ping database: %w", err)
+	// }
 
 	// Configure connection pool settings (recommended)
 	db.SetMaxOpenConns(25)
