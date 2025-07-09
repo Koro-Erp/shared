@@ -23,6 +23,18 @@ func LoadPublicKey(path string) *rsa.PublicKey {
 	return key
 }
 
+func LoadPrivateKey(path string) *rsa.PrivateKey {
+	pem, err := os.ReadFile("internal/config/keys/private.pem")
+	if err != nil {
+		panic("Failed to load private key")
+	}
+	key, err := jwt.ParseRSAPrivateKeyFromPEM(pem)
+	if err != nil {
+		panic("Invalid private key")
+	}
+	return key
+}
+
 func ExtractSubFromJWT(tokenString string) string {
 	token, _, err := new(jwt.Parser).ParseUnverified(tokenString, jwt.MapClaims{})
 	if err != nil {
