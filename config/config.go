@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/Koro-Erp/shared/models"
+	"github.com/Koro-Erp/shared/util"
 	"github.com/joho/godotenv"
 )
 
@@ -40,6 +41,7 @@ func LoadConfig() (models.DbConfig,models.ServiceUrlConfig,models.KeyConfig){
 
 	KeyConfig := models.KeyConfig{
 		EncryptionKey: os.Getenv("AUTO_INCREMENT_STRATEGY"),
+		PublicKey: util.LoadPublicKey(os.Getenv("PUBLIC_KEY_PATH")),
 	}
 
 	return dbConfig,serviceUrlsConfig,KeyConfig
