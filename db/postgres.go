@@ -5,17 +5,18 @@ import (
 	"fmt"
 	"log"
 	"time"
-	
+
+	"github.com/Koro-Erp/shared/models"
 	_ "github.com/lib/pq" // PostgreSQL driver
 )
 
-func Connect(dbHost, dbPort, dbUsername, dbPassword, dbName, dbSSLMode string) (*sql.DB, error) {
+func Connect(dbConfig models.DbConfig) (*sql.DB, error) {
 	connStr := fmt.Sprintf(
 		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
-		dbHost, dbPort, dbUsername, dbPassword, dbName, dbSSLMode,
+		dbConfig.DBHost, dbConfig.DBPort, dbConfig.DBUser, dbConfig.DBPassword, dbConfig.DBName, dbConfig.DBSSLMode,
 	)
 
-	log.Println("Connecting to database...") // Less sensitive than logging full connection string
+	log.Println("Connecting to database...")
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open database connection: %w", err)
