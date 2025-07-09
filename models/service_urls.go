@@ -12,4 +12,7 @@ type ServiceUrlConfig struct {
 	SalesServiceURL string
 	DocumentsServiceURL string
 	CrmServiceURL string
+
+	SaveLogsUrl string
+	CheckUserExistsUrl string
 }

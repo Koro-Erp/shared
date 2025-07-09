@@ -37,7 +37,12 @@ func LoadConfig() (models.DbConfig,models.ServiceUrlConfig,models.KeyConfig){
 		SalesServiceURL:  os.Getenv("SALES_SERVICE_URL"),
 		DocumentsServiceURL:  os.Getenv("DOCUMENTS_SERVICE_URL"),
 		CrmServiceURL:  os.Getenv("CRM_SERVICE_URL"),
+
 	}
+
+	serviceUrlsConfig.SaveLogsUrl = serviceUrlsConfig.LogsServiceURL + "/app-logs"
+	serviceUrlsConfig.CheckUserExistsUrl = serviceUrlsConfig.AuthServiceURL + "/users/%s/exists"
+
 
 	KeyConfig := models.KeyConfig{
 		EncryptionKey: os.Getenv("AUTO_INCREMENT_STRATEGY"),
