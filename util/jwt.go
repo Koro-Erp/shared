@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
@@ -59,4 +60,15 @@ func CopyAuthHeaders(c *gin.Context, req *http.Request) {
 	if userToken := c.GetHeader("X-User-Token"); userToken != "" {
 		req.Header.Set("X-User-Token", userToken)
 	}
+}
+
+func GenerateToken(claims jwt.MapClaims, privateKey *rsa.PrivateKey) (string, error) {
+	claims["iat"] = time.Now().Unix()
+	if claims["exp"] == nil {
+		claims["exp"] = time.Now().Add(15 * time.Hour).Unix()
+	}
+	claims["iss"] = "erp-auth"
+
+	token := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
+	return token.SignedString(privateKey)
 }
