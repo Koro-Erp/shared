@@ -15,7 +15,7 @@ type AppLog struct {
 	ExtraData      map[string]interface{} `json:"extra_data"`
 }
 
-type GatewayLogEntry struct {
+type GatewayLog struct {
 	ServiceName     string
 	UserIdentifier  string
 	ClientIP        string
