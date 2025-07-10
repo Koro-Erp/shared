@@ -15,4 +15,6 @@ type ServiceUrlConfig struct {
 
 	SaveLogsUrl string
 	CheckUserExistsUrl string
+	SaveAppLogsUrl string
+	SaveGatewayLogsUrl string
 }

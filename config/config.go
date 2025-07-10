@@ -40,7 +40,8 @@ func LoadConfig() (models.DbConfig,models.ServiceUrlConfig,models.KeyConfig){
 
 	}
 
-	serviceUrlsConfig.SaveLogsUrl = serviceUrlsConfig.LogsServiceURL + "/app-logs"
+	serviceUrlsConfig.SaveAppLogsUrl = serviceUrlsConfig.LogsServiceURL + "/app-logs"
+	serviceUrlsConfig.SaveGatewayLogsUrl = serviceUrlsConfig.LogsServiceURL + "/gateway-logs"
 	serviceUrlsConfig.CheckUserExistsUrl = serviceUrlsConfig.AuthServiceURL + "/users/%s/exists"
 
 
