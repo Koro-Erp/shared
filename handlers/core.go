@@ -44,7 +44,7 @@ func SendAppLogRequest(c *gin.Context, data models.AppLog, url string) error {
 	return nil
 }
 
-func SendGatewayLogRequest(c *gin.Context, data models.GatewayLog, url string) error {
+func SendGatewayLogRequest(data models.GatewayLog, url string) error {
 	// Marshal GatewayLog struct to JSON
 	jsonData, err := json.Marshal(data)
 	if err != nil {
@@ -58,8 +58,10 @@ func SendGatewayLogRequest(c *gin.Context, data models.GatewayLog, url string) e
 	}
 	req.Header.Set("Content-Type", "application/json")
 
-	// Use the helper function to set token headers
-	util.CopyAuthHeaders(c, req)
+	// Use the AuthHeaders from the model directly
+	for key, value := range data.AuthHeaders {
+		req.Header.Set(key, value) // Set all auth headers
+	}
 
 	// Send request
 	client := &http.Client{}
@@ -68,10 +70,6 @@ func SendGatewayLogRequest(c *gin.Context, data models.GatewayLog, url string) e
 		return fmt.Errorf("failed to send log request: %w", err)
 	}
 	defer resp.Body.Close()
-
-	// Log response for debugging
-	// body, _ := io.ReadAll(resp.Body)
-	// fmt.Println("Log response:", string(body))
 
 	return nil
 }

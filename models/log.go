@@ -28,6 +28,6 @@ type GatewayLog struct {
 	ResponseStatus int       `json:"response_status"`
 	ResponseBody   string    `json:"response_body"`
 	DurationMs     int64     `json:"duration_ms"`
-	AuthHeaders    map[string]string      `json:"auth_headers"`
+	AuthHeaders    map[string]string  `json:"auth_headers"`
 }
 
