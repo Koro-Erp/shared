@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 
 	"github.com/Koro-Erp/shared/models"
@@ -39,8 +38,8 @@ func SendLogRequest(c *gin.Context, data models.AppLog, url string) error {
 	defer resp.Body.Close()
 
 	// Log response for debugging
-	body, _ := io.ReadAll(resp.Body)
-	fmt.Println("Log response:", string(body))
+	// body, _ := io.ReadAll(resp.Body)
+	// fmt.Println("Log response:", string(body))
 
 	return nil
 }

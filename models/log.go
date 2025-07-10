@@ -14,3 +14,16 @@ type AppLog struct {
 	StackTrace     string         `json:"stack_trace"`
 	ExtraData      map[string]interface{} `json:"extra_data"`
 }
+
+type GatewayLogEntry struct {
+	ServiceName     string
+	UserIdentifier  string
+	ClientIP        string
+	RequestMethod   string
+	RequestURL      string
+	RequestHeaders  string
+	RequestBody     string
+	ResponseStatus  int
+	ResponseBody    string
+	DurationMs      int64
+}
